@@ -15,23 +15,28 @@ if(!place_meeting(x, y + yspeed, o_solid)) {
 	}
 		
 } else {
-	while(!place_meeting(x, y, o_solid)) {
+	while(!place_meeting(x, y, o_solid) and yspeed > 0) {
 		y++;	
 	}
+	
+	if(place_meeting(x, y - yspeed, o_solid)) {
+		yspeed = 1;
+	}
+	
 	yspeed = 0;
 	doubleJump = true;
 	
 	if (up) {
 		yspeed = -20;
-		alarm[0] = 15;
+		alarm[0] = 20;
 	}
 }
 
 if (right) {
-	xspeed = 5;	
+	xspeed = clamp(xspeed + xacc, 0, maxspeed);	
 }
 if (left) {
-	xspeed = -5;	 
+	xspeed = clamp(xspeed - xacc, -maxspeed, 0);		 
 }
 
 if (!left and !right) {

@@ -3,3 +3,5 @@
 yspeed = 0;
 xspeed = 0;
 doubleJump = true;
+xacc = 2;
+maxspeed = 10;
