@@ -10,18 +10,20 @@ up_release = keyboard_check_released(ord("W"));
 
 if (!isOnGround(o_solid)) {
 	yspeed += yacc;
-	
+	if (up_release) jumpComplete = true;
 	if (up_release and yspeed < -6) {
 		yspeed = -jumpHeight/2;
 	}
 	
-	if (doubleJump and up and alarm[0] <= 0) {
+	if (doubleJump and up and alarm[0] <= 0 and jumpComplete = true) {
 		doubleJump = false;
 		yspeed = -jumpHeight;
 	}
 } else {
+
 	doubleJump = true;
 	if (up) {
+		jumpComplete = false;
 		yspeed = -jumpHeight;
 		alarm[0] = 20;
 	}
