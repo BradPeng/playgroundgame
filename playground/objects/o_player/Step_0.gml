@@ -26,14 +26,6 @@ if (!isOnGround(o_solid)) {
 		alarm[0] = 20;
 	}
 }
-
-
-if (place_meeting(x, y + yspeed, o_solid)) {
-	while(!place_meeting(x, y + sign(yspeed), o_solid)) {
-		y += sign(yspeed);	
-	}
-	yspeed = 0;
-}
 	
 if (left or right) {
 	xspeed += (right - left) * xacc;
@@ -46,13 +38,4 @@ if (left or right) {
 	}
 }	
 
-if (place_meeting(x + xspeed, y, o_solid)) {
-	while(!place_meeting(x + sign(xspeed), y, o_solid)) {
-		x += sign(xspeed);	
-	}
-	xspeed = 0;
-}
-	
-	
-x += xspeed;
-y += yspeed;
+move(o_solid);
