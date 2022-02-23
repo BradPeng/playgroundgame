@@ -5,3 +5,5 @@ xspeed = 0;
 doubleJump = true;
 xacc = 2;
 maxspeed = 10;
+yacc = 1;
+jumpHeight = 20;

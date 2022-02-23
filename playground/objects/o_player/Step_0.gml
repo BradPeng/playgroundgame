@@ -6,41 +6,53 @@ right = keyboard_check(ord("D"));
 left = keyboard_check(ord("A"));
 up = keyboard_check(ord("W"));
 down = keyboard_check(ord("S"));
+up_release = keyboard_check_released(ord("W"));
 
-if(!place_meeting(x, y + yspeed, o_solid)) {
-	yspeed += 1;
+if (!isOnGround(o_solid)) {
+	yspeed += yacc;
+	
+	if (up_release and yspeed < -6) {
+		yspeed = -jumpHeight/2;
+	}
+	
 	if (doubleJump and up and alarm[0] <= 0) {
 		doubleJump = false;
-		yspeed = -20;
+		yspeed = -jumpHeight;
 	}
-		
 } else {
-	while(!place_meeting(x, y, o_solid) and yspeed > 0) {
-		y++;	
-	}
-	
-	if(place_meeting(x, y - yspeed, o_solid)) {
-		yspeed = 1;
-	}
-	
-	yspeed = 0;
 	doubleJump = true;
-	
 	if (up) {
-		yspeed = -20;
+		yspeed = -jumpHeight;
 		alarm[0] = 20;
 	}
 }
 
-if (right) {
-	xspeed = clamp(xspeed + xacc, 0, maxspeed);	
-}
-if (left) {
-	xspeed = clamp(xspeed - xacc, -maxspeed, 0);		 
-}
 
-if (!left and !right) {
-	xspeed = 0;	
+if (place_meeting(x, y + yspeed, o_solid)) {
+	while(!place_meeting(x, y + sign(yspeed), o_solid)) {
+		y += sign(yspeed);	
+	}
+	yspeed = 0;
 }
+	
+if (left or right) {
+	xspeed += (right - left) * xacc;
+	xspeed = clamp(xspeed, -maxspeed, maxspeed);	
+} else {
+	if (xspeed > 0) {
+		xspeed -= xacc;
+	} else if (xspeed < 0) {
+		xspeed += xacc;	
+	}
+}	
+
+if (place_meeting(x + xspeed, y, o_solid)) {
+	while(!place_meeting(x + sign(xspeed), y, o_solid)) {
+		x += sign(xspeed);	
+	}
+	xspeed = 0;
+}
+	
+	
 x += xspeed;
 y += yspeed;
