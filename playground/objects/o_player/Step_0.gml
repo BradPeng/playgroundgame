@@ -11,6 +11,7 @@ space = keyboard_check_pressed(vk_space);
 
 switch playerState {
 	case playerStates.move:
+		//show_debug_message("move");
 		if (!isOnGround(o_solid)) {
 			yspeed += yacc;
 			if (up_release) jumpComplete = true;
@@ -66,7 +67,8 @@ switch playerState {
 	break;
 		
 	case playerStates.wallSlide:
-		if ((isOnWallRight and !right) or (isOnWallLeft and !left)) {
+		//show_debug_message("slide");
+		if ((!isOnWallLeft(o_solid) and !isOnWallRight(o_solid)) or ((isOnWallRight(o_solid) and !right) or (isOnWallLeft(o_solid) and !left))) {
 			playerState = playerStates.move;	
 		} else {
 			yspeed = wallSlideSpeed;
