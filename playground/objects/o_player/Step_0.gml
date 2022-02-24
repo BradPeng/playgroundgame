@@ -35,6 +35,14 @@ switch playerState {
 	
 		if ((isOnWallRight(o_solid) and right) or (isOnWallLeft(o_solid) and left)) {
 			playerState = playerStates.wallSlide;
+			doubleJump = true;
+		} else if ((isOnWallRight(o_solid) and left) or (isOnWallLeft(o_solid) and right)) {
+			doubleJump = true;
+			if (up) {
+				jumpComplete = false;
+				yspeed = -jumpHeight;
+				alarm[0] = 20;
+			}
 		}
 			
 		if (left or right) {
@@ -68,9 +76,20 @@ switch playerState {
 		
 	case playerStates.wallSlide:
 		//show_debug_message("slide");
-		if ((!isOnWallLeft(o_solid) and !isOnWallRight(o_solid)) or ((isOnWallRight(o_solid) and !right) or (isOnWallLeft(o_solid) and !left))) {
+		doubleJump = true;
+		onLeft = isOnWallLeft(o_solid);
+		onRight = isOnWallRight(o_solid);
+		if ((!onLeft and !onRight) or ((onRight and !right) or (onLeft and !left))) {
 			playerState = playerStates.move;	
 		} else {
+			/*if (onLeft and up and right) {
+				yspeed = jumpHeight;	
+				xspeed += (right - left) * xacc;
+				xspeed = clamp(xspeed, -maxspeed, maxspeed);
+				move(o_solid);
+				playerState = playerStates.move;
+				break;
+			}*/
 			yspeed = wallSlideSpeed;
 			move(o_solid);
 		}
