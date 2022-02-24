@@ -14,8 +14,10 @@ jumpComplete = false;
 alarm[1] = 0;
 playerState = playerStates.move;
 dashSpeed = 30;
+wallSlideSpeed = 1;
 
 enum playerStates {
 	move,
-	dash
+	dash,
+	wallSlide
 }

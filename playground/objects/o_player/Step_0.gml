@@ -22,6 +22,7 @@ switch playerState {
 				doubleJump = false;
 				yspeed = -jumpHeight;
 			}
+			
 		} else {
 			doubleJump = true;
 			if (up) {
@@ -31,6 +32,10 @@ switch playerState {
 			}
 		}
 	
+		if ((isOnWallRight(o_solid) and right) or (isOnWallLeft(o_solid) and left)) {
+			playerState = playerStates.wallSlide;
+		}
+			
 		if (left or right) {
 			xspeed += (right - left) * xacc;
 			xspeed = clamp(xspeed, -maxspeed, maxspeed);	
@@ -49,7 +54,7 @@ switch playerState {
 		}
 		move(o_solid);
 		
-		break;
+	break;
 		
 	case playerStates.dash:
 		xspeed = dashSpeed * sign(xspeed); 
@@ -58,6 +63,15 @@ switch playerState {
 			playerState = playerStates.move;
 		}
 		move(o_solid);
-		break;
+	break;
+		
+	case playerStates.wallSlide:
+		if ((isOnWallRight and !right) or (isOnWallLeft and !left)) {
+			playerState = playerStates.move;	
+		} else {
+			yspeed = wallSlideSpeed;
+			move(o_solid);
+		}
+	break;
 	
 }
