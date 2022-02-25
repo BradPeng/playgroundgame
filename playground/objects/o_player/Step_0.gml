@@ -4,29 +4,30 @@
 
 right = keyboard_check(ord("D"));
 left = keyboard_check(ord("A"));
-up = keyboard_check(ord("W"));
+jump = keyboard_check_pressed(vk_space);//keyboard_check(ord("W"));
 down = keyboard_check(ord("S"));
-up_release = keyboard_check_released(ord("W"));
-space = keyboard_check_pressed(vk_space);
+jumpHold = keyboard_check(vk_space);
+jump_release = keyboard_check_released(vk_space)//keyboard_check_released(ord("W"));
+dash = keyboard_check_pressed(vk_shift);
 
 switch playerState {
 	case playerStates.move:
 		//show_debug_message("move");
 		if (!isOnGround(o_solid)) {
 			yspeed += yacc;
-			if (up_release) jumpComplete = true;
-			if (up_release and yspeed < -6) {
+			if (jump_release) jumpComplete = true;
+			if (jump_release and yspeed < -6) {
 				yspeed = -jumpHeight/2;
 			}
 	
-			if (doubleJump and up and alarm[0] <= 0 and jumpComplete = true) {
+			if (doubleJump and jump and alarm[0] <= 0 and jumpComplete = true) {
 				doubleJump = false;
 				yspeed = -jumpHeight;
 			}
 			
 		} else {
 			doubleJump = true;
-			if (up) {
+			if (jump) {
 				jumpComplete = false;
 				yspeed = -jumpHeight;
 				alarm[0] = 20;
@@ -36,15 +37,8 @@ switch playerState {
 		if ((isOnWallRight(o_solid) and right) or (isOnWallLeft(o_solid) and left)) {
 			playerState = playerStates.wallSlide;
 			doubleJump = true;
-		} else if ((isOnWallRight(o_solid) and left) or (isOnWallLeft(o_solid) and right)) {
-			doubleJump = true;
-			if (up) {
-				jumpComplete = false;
-				yspeed = -jumpHeight;
-				alarm[0] = 20;
-			}
-		}
-			
+		} 
+		
 		if (left or right) {
 			xspeed += (right - left) * xacc;
 			xspeed = clamp(xspeed, -maxspeed, maxspeed);	
@@ -56,7 +50,7 @@ switch playerState {
 			}
 		}	
 
-		if (space and alarm[2] <= 0) {
+		if (dash and alarm[2] <= 0) {
 			playerState = playerStates.dash
 				alarm[1] = 5;
 				
@@ -82,16 +76,18 @@ switch playerState {
 		if ((!onLeft and !onRight) or ((onRight and !right) or (onLeft and !left))) {
 			playerState = playerStates.move;	
 		} else {
-			/*if (onLeft and up and right) {
-				yspeed = jumpHeight;	
-				xspeed += (right - left) * xacc;
-				xspeed = clamp(xspeed, -maxspeed, maxspeed);
+			if (((onLeft and left) or (onRight and right)) and jumpHold) {
+				doubleJump = true;
+				jumpComplete = false;
+				yspeed = -jumpHeight;
+				xspeed = wallKickXSpeed * (left - right);
+				alarm[0] = 20;
+				playerState = playerStates.move;	
+		
+			} else {
+				yspeed = wallSlideSpeed;
 				move(o_solid);
-				playerState = playerStates.move;
-				break;
-			}*/
-			yspeed = wallSlideSpeed;
-			move(o_solid);
+			}
 		}
 	break;
 	

@@ -15,6 +15,7 @@ alarm[1] = 0;
 playerState = playerStates.move;
 dashSpeed = 30;
 wallSlideSpeed = 3;
+wallKickXSpeed = 20;
 
 enum playerStates {
 	move,
