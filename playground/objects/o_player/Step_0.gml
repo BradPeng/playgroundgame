@@ -61,6 +61,9 @@ switch playerState {
 		
 	case playerStates.dash:
 		xspeed = dashSpeed * sign(xspeed); 
+		if (alarm[1] % 2 == 0) {
+			instance_create_layer(x, y, "Instances", o_player_dash_image);
+		}
 		if (alarm[1] <= 0) {
 			alarm[2] = 20;
 			playerState = playerStates.move;
