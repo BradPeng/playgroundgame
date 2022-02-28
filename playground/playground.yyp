@@ -1,6 +1,8 @@
 {
   "resources": [
+    {"id":{"name":"s_spike","path":"sprites/s_spike/s_spike.yy",},"order":4,},
     {"id":{"name":"o_goal","path":"objects/o_goal/o_goal.yy",},"order":2,},
+    {"id":{"name":"o_spike","path":"objects/o_spike/o_spike.yy",},"order":5,},
     {"id":{"name":"isOnWallLeft","path":"scripts/isOnWallLeft/isOnWallLeft.yy",},"order":3,},
     {"id":{"name":"isOnGround","path":"scripts/isOnGround/isOnGround.yy",},"order":0,},
     {"id":{"name":"move","path":"scripts/move/move.yy",},"order":1,},
