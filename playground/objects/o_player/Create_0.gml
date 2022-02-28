@@ -2,7 +2,7 @@
 // You can write your code in this editor
 
 //window_set_fullscreen(true);
-
+hp = 3;
 yspeed = 0;
 xspeed = 0;
 doubleJump = true;

@@ -13,6 +13,7 @@
     {"id":{"name":"isOnWallRight","path":"scripts/isOnWallRight/isOnWallRight.yy",},"order":2,},
     {"id":{"name":"s_player","path":"sprites/s_player/s_player.yy",},"order":0,},
     {"id":{"name":"o_player","path":"objects/o_player/o_player.yy",},"order":0,},
+    {"id":{"name":"o_stats","path":"objects/o_stats/o_stats.yy",},"order":6,},
     {"id":{"name":"s_goal","path":"sprites/s_goal/s_goal.yy",},"order":3,},
     {"id":{"name":"s_ground","path":"sprites/s_ground/s_ground.yy",},"order":1,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},

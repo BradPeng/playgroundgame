@@ -1,8 +1,5 @@
 {
-  "spriteId": {
-    "name": "s_goal",
-    "path": "sprites/s_goal/s_goal.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
@@ -30,7 +27,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "o_goal",
+  "name": "o_stats",
   "tags": [],
   "resourceType": "GMObject",
 }
