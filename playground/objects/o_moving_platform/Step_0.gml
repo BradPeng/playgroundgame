@@ -1,0 +1,7 @@
+/// @description Insert description here
+// You can write your code in this editor
+if (!position_meeting(x + 3 * dir, y, o_moving_platform_path)) {
+	dir *= -1;
+}
+
+x += spd * dir;

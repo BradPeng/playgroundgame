@@ -32,6 +32,14 @@ switch playerState {
 				yspeed = -jumpHeight;
 				alarm[0] = 20;
 			}
+			
+			if (place_meeting(x, y+1, o_moving_platform)) {
+				currentPlatform = instance_nearest(x, y, o_moving_platform);
+				xspeed = currentPlatform.spd * currentPlatform.dir	 
+				xspeed = clamp(xspeed, -maxspeed, maxspeed);
+				//move(o_solid);
+				//yspeed = 0;	
+			}
 		}
 	
 		if ((isOnWallRight(o_solid) and right) or (isOnWallLeft(o_solid) and left)) {
