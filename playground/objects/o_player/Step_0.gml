@@ -32,14 +32,6 @@ switch playerState {
 				yspeed = -jumpHeight;
 				alarm[0] = 20;
 			}
-			
-			if (place_meeting(x, y+1, o_moving_platform)) {
-				currentPlatform = instance_nearest(x, y, o_moving_platform);
-				xspeed = currentPlatform.spd * currentPlatform.dir	 
-				xspeed = clamp(xspeed, -maxspeed, maxspeed);
-				//move(o_solid);
-				//yspeed = 0;	
-			}
 		}
 	
 		if ((isOnWallRight(o_solid) and right) or (isOnWallLeft(o_solid) and left)) {
@@ -47,20 +39,45 @@ switch playerState {
 			doubleJump = true;
 		} 
 		
-		if (left or right) {
-			xspeed += (right - left) * xacc;
-			xspeed = clamp(xspeed, -maxspeed, maxspeed);	
-		} else {
+		
+		if (left and xspeed > -maxspeed) {
+			xspeed += -xacc;
+			
+			if (place_meeting(x, y + 1, o_moving_platform)) {
+				currentPlatform = instance_nearest(x, y, o_moving_platform);
+				if (currentPlatform.xspeed > 0) {
+					xspeed = xspeed - (currentPlatform.xspeed);	 
+				} else {
+					xspeed = xspeed + (currentPlatform.xspeed);	 
+				}	 
+			}
+		} else if (right and xspeed < maxspeed) {
+			xspeed += xacc;
+			
+			if (place_meeting(x, y + 1, o_moving_platform)) {
+				currentPlatform = instance_nearest(x, y, o_moving_platform);
+				if (currentPlatform.xspeed > 0) {
+					xspeed = xspeed + (currentPlatform.xspeed);	 
+				} else {
+					xspeed = xspeed - (currentPlatform.xspeed);	 
+				}
+			}
+		} else if (!place_meeting(x, y+1, o_moving_platform)) {
+			
 			if (xspeed > 0) {
 				xspeed -= xacc;
 			} else if (xspeed < 0) {
 				xspeed += xacc;	
 			}
-		}	
+			
+		} else if (place_meeting(x, y+1, o_moving_platform)) {
+			currentPlatform = instance_nearest(x, y, o_moving_platform);
+			xspeed = currentPlatform.spd * currentPlatform.dir	 
+		}
 
 		if (dash and alarm[2] <= 0) {
 			playerState = playerStates.dash
-				alarm[1] = 5;
+			alarm[1] = 5;
 				
 		}
 		move(o_solid);
