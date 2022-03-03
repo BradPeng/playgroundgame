@@ -39,40 +39,24 @@ switch playerState {
 			doubleJump = true;
 		} 
 		
+		if (place_meeting(x, y + 1, o_moving_platform)) {
+			playerState = playerStates.onMovingPlatform;	
+			break;
+		}
 		
 		if (left and xspeed > -maxspeed) {
 			xspeed += -xacc;
 			
-			if (place_meeting(x, y + 1, o_moving_platform)) {
-				currentPlatform = instance_nearest(x, y, o_moving_platform);
-				if (currentPlatform.xspeed > 0) {
-					xspeed = xspeed - (currentPlatform.xspeed);	 
-				} else {
-					xspeed = xspeed + (currentPlatform.xspeed);	 
-				}	 
-			}
 		} else if (right and xspeed < maxspeed) {
 			xspeed += xacc;
-			
-			if (place_meeting(x, y + 1, o_moving_platform)) {
-				currentPlatform = instance_nearest(x, y, o_moving_platform);
-				if (currentPlatform.xspeed > 0) {
-					xspeed = xspeed + (currentPlatform.xspeed);	 
-				} else {
-					xspeed = xspeed - (currentPlatform.xspeed);	 
-				}
-			}
-		} else if (!place_meeting(x, y+1, o_moving_platform)) {
+		
+		} else {
 			
 			if (xspeed > 0) {
 				xspeed -= xacc;
 			} else if (xspeed < 0) {
 				xspeed += xacc;	
 			}
-			
-		} else if (place_meeting(x, y+1, o_moving_platform)) {
-			currentPlatform = instance_nearest(x, y, o_moving_platform);
-			xspeed = currentPlatform.spd * currentPlatform.dir	 
 		}
 
 		if (dash and alarm[2] <= 0) {
@@ -118,5 +102,40 @@ switch playerState {
 			}
 		}
 	break;
+	
+	case playerStates.onMovingPlatform:
+		if (!place_meeting(x, y + 1, o_moving_platform)) {
+			playerState = playerStates.move;
+			break;
+		}
+		
+		currentPlatform = instance_nearest(x, y, o_moving_platform);
+		platformSpeed = currentPlatform.xspeed;
+		
+		if (right or left) {
+			xspeed += (right - left) * xacc;
+			xspeed = clamp(xspeed, -maxspeed, maxspeed);
+		} else {
+			xspeed = platformSpeed;
+		}
+		
+		doubleJump = true;
+		if (jump) {
+			jumpComplete = false;
+			yspeed = -jumpHeight;
+			alarm[0] = 20;
+			break;
+		}
+		
+		if (dash and alarm[2] <= 0) {
+			playerState = playerStates.dash
+			alarm[1] = 5;
+			break;
+				
+		}
+		
+		move(o_solid);
+		
+		
 	
 }

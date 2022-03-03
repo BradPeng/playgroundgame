@@ -20,5 +20,6 @@ wallKickXSpeed = 20;
 enum playerStates {
 	move,
 	dash,
-	wallSlide
+	wallSlide,
+	onMovingPlatform,
 }
