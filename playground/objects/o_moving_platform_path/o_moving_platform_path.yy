@@ -4,7 +4,7 @@
     "path": "sprites/s_moving_platform_path/s_moving_platform_path.yy",
   },
   "solid": false,
-  "visible": true,
+  "visible": false,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": null,

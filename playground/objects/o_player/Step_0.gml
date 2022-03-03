@@ -4,7 +4,7 @@
 
 right = keyboard_check(ord("D"));
 left = keyboard_check(ord("A"));
-jump = keyboard_check_pressed(vk_space);//keyboard_check(ord("W"));
+jump = keyboard_check_pressed(vk_space)//keyboard_check(ord("W"));
 down = keyboard_check(ord("S"));
 jumpHold = keyboard_check(vk_space);
 jump_release = keyboard_check_released(vk_space)//keyboard_check_released(ord("W"));
