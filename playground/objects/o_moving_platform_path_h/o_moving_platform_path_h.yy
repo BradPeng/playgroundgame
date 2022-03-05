@@ -1,16 +1,13 @@
 {
   "spriteId": {
-    "name": "s_moving_platform",
-    "path": "sprites/s_moving_platform/s_moving_platform.yy",
+    "name": "s_moving_platform_path_h",
+    "path": "sprites/s_moving_platform_path_h/s_moving_platform_path_h.yy",
   },
   "solid": false,
-  "visible": true,
+  "visible": false,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": {
-    "name": "o_solid",
-    "path": "objects/o_solid/o_solid.yy",
-  },
+  "parentObjectId": null,
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
@@ -23,10 +20,7 @@
   "physicsStartAwake": true,
   "physicsKinematic": false,
   "physicsShapePoints": [],
-  "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-  ],
+  "eventList": [],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
@@ -34,7 +28,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "o_moving_platform",
+  "name": "o_moving_platform_path_h",
   "tags": [],
   "resourceType": "GMObject",
 }

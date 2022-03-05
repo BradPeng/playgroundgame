@@ -39,7 +39,7 @@ switch playerState {
 			doubleJump = true;
 		} 
 		
-		if (place_meeting(x, y + 1, o_moving_platform)) {
+		if (place_meeting(x, y + 1, o_moving_platform_h)) {
 			playerState = playerStates.onMovingPlatform;	
 			break;
 		}
@@ -104,12 +104,12 @@ switch playerState {
 	break;
 	
 	case playerStates.onMovingPlatform:
-		if (!place_meeting(x, y + 1, o_moving_platform)) {
+		if (!place_meeting(x, y + 1, o_moving_platform_h)) {
 			playerState = playerStates.move;
 			break;
 		}
 		
-		currentPlatform = instance_nearest(x, y, o_moving_platform);
+		currentPlatform = instance_nearest(x, y, o_moving_platform_h);
 		platformSpeed = currentPlatform.xspeed;
 		
 		if (right or left) {

@@ -1,10 +1,10 @@
 {
   "spriteId": {
-    "name": "s_moving_platform_path",
-    "path": "sprites/s_moving_platform_path/s_moving_platform_path.yy",
+    "name": "s_moving_platform",
+    "path": "sprites/s_moving_platform/s_moving_platform.yy",
   },
   "solid": false,
-  "visible": false,
+  "visible": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": null,
@@ -28,7 +28,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "o_moving_platform_path",
+  "name": "o_moving_platform_vertical",
   "tags": [],
   "resourceType": "GMObject",
 }

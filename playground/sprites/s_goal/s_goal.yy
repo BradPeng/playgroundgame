@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"s_goal","path":"sprites/s_goal/s_goal.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "s_goal",
     "tags": [],
     "resourceType": "GMSequence",
